@@ -1,0 +1,2 @@
+# This file ensures the temp directory is tracked by Git
+# while ignoring the temporary files
