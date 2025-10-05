@@ -68,7 +68,7 @@ if __name__ == "__main__":
         print("   Run the application using the virtual environment:")
         print(f"   {os.path.join(os.path.dirname(__file__), '.venv', 'bin', 'python')} app.py")
         print("\n   Or install dependencies:")
-        print("   pip install -r requirements.txt")
+        print("   pip install -r setup/requirements.txt")
         sys.exit(1)
     
     # Import version and main function only after dependency check

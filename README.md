@@ -33,8 +33,6 @@ A powerful, user-friendly web application that intelligently scrapes documentati
 documentation-downloader/
 ├── 📄 README.md              # This file
 ├── 📄 LICENSE                # MIT License
-├── 📄 requirements.txt       # Dependencies
-├── 📄 setup.py               # Package distribution
 ├── 📄 .gitignore             # Git ignore rules
 ├── 🚀 app.py                 # Main entry point
 ├── 🚀 start_app.py           # Alternative startup script
@@ -49,6 +47,12 @@ documentation-downloader/
 │       ├── main.py           # FastAPI application
 │       ├── templates/        # HTML templates
 │       └── static/           # CSS/JS assets
+│
+├── 📁 setup/                 # Package configuration
+│   ├── README.md            # Setup documentation
+│   ├── requirements.txt     # Dependencies
+│   ├── setup.py             # Package distribution
+│   └── pyproject.toml       # Modern packaging config
 │
 ├── 📁 tests/                 # Test suite
 │   ├── test_app.py          # Basic tests
@@ -68,6 +72,10 @@ documentation-downloader/
 │   ├── setup_dev.sh         # Development setup
 │   └── prepare_git.sh       # Git preparation
 │
+├── 📁 downloads/             # Generated files (local)
+├── 📁 temp/                  # Temporary files (auto-cleaned)
+└── 📁 .venv/                 # Virtual environment (created by setup)
+```
 ├── 📁 downloads/             # Generated files (local)
 ├── 📁 temp/                  # Temporary files (auto-cleaned)
 └── 📁 .venv/                 # Virtual environment (created by setup)
@@ -97,7 +105,7 @@ documentation-downloader/
    ```bash
    python -m venv .venv
    source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-   pip install -r requirements.txt
+   pip install -r setup/requirements.txt
    ```
 
 ### Usage
@@ -120,7 +128,7 @@ Then:
 
 ## 📋 Requirements
 
-All dependencies are listed in `requirements.txt`:
+All dependencies are listed in `setup/requirements.txt`:
 
 ```
 fastapi>=0.104.1
@@ -205,7 +213,7 @@ python tests/demo.py
 **Solution**: Ensure you're running from the project root and the virtual environment is activated
 
 **Issue**: "No module named 'reportlab'"
-**Solution**: Run `pip install -r requirements.txt` in your activated virtual environment
+**Solution**: Run `pip install -r setup/requirements.txt` in your activated virtual environment
 
 **Issue**: PDF generation fails
 **Solution**: The app will automatically fall back to HTML files that can be printed to PDF
