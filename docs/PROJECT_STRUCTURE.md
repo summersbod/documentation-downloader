@@ -75,10 +75,33 @@ Both methods will start the FastAPI server on http://localhost:8000
 5. **Scalability**: Easy to add new modules in appropriate directories
 6. **Professional Layout**: Follows Python packaging best practices
 
+## Dependency Management
+
+The application includes smart dependency checking in `app.py`:
+
+- **Automatic Detection**: Checks for missing dependencies before startup
+- **Clear Error Messages**: Shows exactly which dependencies are missing
+- **Helpful Solutions**: Provides commands to fix dependency issues
+- **Virtual Environment Support**: Automatically detects and suggests using .venv
+
+If dependencies are missing, you'll see:
+```
+❌ Missing required dependencies:
+   • fastapi
+   • aiofiles
+
+💡 Solution:
+   Run the application using the virtual environment:
+   /path/to/project/.venv/bin/python app.py
+```
+
 ## Module Organization
 
 - **src/core/**: Contains the core business logic that could be reused
+  - Lazy imports prevent early dependency loading
+  - Clean separation of configuration, scraping, and version info
 - **src/web/**: Contains web-specific code (FastAPI, templates, static files)
+  - Web interface components isolated from core logic
 - **tests/**: All test files for different components
 - **docs/**: User and developer documentation
 - **scripts/**: Development and deployment automation
