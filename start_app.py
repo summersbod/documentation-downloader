@@ -8,6 +8,9 @@ import sys
 import subprocess
 import os
 
+# Add src directory to path for imports
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'src'))
+
 def check_reportlab():
     """Check if ReportLab can be imported successfully"""
     try:
@@ -66,7 +69,7 @@ def main():
     
     try:
         import uvicorn
-        from main import app
+        from web.main import app
         uvicorn.run(app, host="0.0.0.0", port=8000)
     except KeyboardInterrupt:
         print("\nShutting down server...")

@@ -8,7 +8,7 @@ A powerful, user-friendly web application that intelligently scrapes documentati
 
 ## ✨ Features
 
-### � Core Functionality
+### 🎯 Core Functionality
 - **📄 PDF Generation**: Creates professional PDFs using ReportLab with proper formatting
 - **📝 Markdown Export**: Generates clean, structured Markdown files
 - **🔗 Intelligent Crawling**: Automatically discovers and follows documentation links up to 3 levels deep
@@ -27,6 +27,52 @@ A powerful, user-friendly web application that intelligently scrapes documentati
 - **🛡️ Error Handling**: Robust error recovery and user feedback
 - **📈 Scalable Architecture**: Clean, modular code structure
 
+## 🏗️ Project Structure
+
+```
+documentation-downloader/
+├── 📄 README.md              # This file
+├── 📄 LICENSE                # MIT License
+├── 📄 requirements.txt       # Dependencies
+├── 📄 setup.py               # Package distribution
+├── 📄 .gitignore             # Git ignore rules
+├── 🚀 app.py                 # Main entry point
+├── 🚀 start_app.py           # Alternative startup script
+│
+├── 📁 src/                   # Source code
+│   ├── 📁 core/              # Core functionality
+│   │   ├── config.py         # Configuration settings
+│   │   ├── version.py        # Version information
+│   │   └── doc_scraper.py    # Documentation scraping logic
+│   │
+│   └── 📁 web/               # Web interface
+│       ├── main.py           # FastAPI application
+│       ├── templates/        # HTML templates
+│       └── static/           # CSS/JS assets
+│
+├── 📁 tests/                 # Test suite
+│   ├── test_app.py          # Basic tests
+│   ├── test_enhanced.py     # Enhanced tests
+│   └── demo.py              # Demo/example usage
+│
+├── 📁 docs/                  # Documentation
+│   ├── README.md            # Documentation index
+│   ├── QUICK_START.md       # Quick start guide
+│   ├── PROJECT_STRUCTURE.md # Project organization guide
+│   ├── CONTRIBUTING.md      # Contributor guide
+│   ├── CHANGELOG.md         # Version history
+│   ├── ENHANCEMENTS.md      # Enhancement documentation
+│   └── FIXES.md             # Bug fix documentation
+│
+├── 📁 scripts/               # Utility scripts
+│   ├── setup_dev.sh         # Development setup
+│   └── prepare_git.sh       # Git preparation
+│
+├── 📁 downloads/             # Generated files (local)
+├── 📁 temp/                  # Temporary files (auto-cleaned)
+└── 📁 .venv/                 # Virtual environment (created by setup)
+```
+
 ## 🚀 Quick Start
 
 ### Prerequisites
@@ -37,40 +83,40 @@ A powerful, user-friendly web application that intelligently scrapes documentati
 
 1. **Clone the repository**:
    ```bash
-   git clone <your-repo-url>
-   cd doc-download
+   git clone https://github.com/summersbod/documentation-downloader.git
+   cd documentation-downloader
    ```
 
-2. **Create virtual environment** (recommended):
+2. **Quick setup** (automated):
+   ```bash
+   chmod +x scripts/setup_dev.sh
+   ./scripts/setup_dev.sh
+   ```
+
+3. **Manual setup** (alternative):
    ```bash
    python -m venv .venv
-   
-   # On macOS/Linux:
-   source .venv/bin/activate
-   
-   # On Windows:
-   .venv\Scripts\activate
-   ```
-
-3. **Install dependencies**:
-   ```bash
+   source .venv/bin/activate  # On Windows: .venv\Scripts\activate
    pip install -r requirements.txt
    ```
 
 ### Usage
 
-1. **Start the application**:
-   ```bash
-   python start_app.py
-   ```
+**Option 1 - Main entry point:**
+```bash
+python app.py
+```
 
-2. **Open your browser** and go to: `http://localhost:8000`
+**Option 2 - Startup script:**
+```bash
+python start_app.py
+```
 
-3. **Enter a documentation URL** (e.g., `https://docs.python.org/3/tutorial/`)
-
-4. **Select output format** (PDF or Markdown)
-
-5. **Watch the real-time progress** and download your file!
+Then:
+1. **Open your browser** and go to: `http://localhost:8000`
+2. **Enter a documentation URL** (e.g., `https://docs.python.org/3/tutorial/`)
+3. **Select output format** (PDF or Markdown)
+4. **Watch the real-time progress** and download your file!
 
 ## 📋 Requirements
 
@@ -90,23 +136,6 @@ requests>=2.31.0
 websockets>=12.0
 ```
 
-## 🏗️ Project Structure
-
-```
-doc-download/
-├── main.py              # FastAPI application and WebSocket handling
-├── doc_scraper.py       # Core scraping and PDF/Markdown generation
-├── config.py            # Configuration settings
-├── start_app.py         # Application startup script
-├── requirements.txt     # Python dependencies
-├── templates/
-│   └── index.html       # Web interface template
-├── static/             # CSS and JavaScript files
-├── downloads/          # Generated files (local serving)
-├── temp/              # Temporary files (auto-cleaned)
-└── README.md          # This file
-```
-
 ## 🎯 Supported Sites
 
 The application works with most documentation websites that have:
@@ -123,7 +152,7 @@ The application works with most documentation websites that have:
 
 ## ⚙️ Configuration
 
-Edit `config.py` to customize:
+Edit `src/core/config.py` to customize:
 
 ```python
 # Scraping behavior
@@ -141,10 +170,10 @@ TEMP_DIR = "temp"                          # Temporary files
 ### Command Line Options
 ```bash
 # Custom host and port
-uvicorn main:app --host 0.0.0.0 --port 8080
+uvicorn src.web.main:app --host 0.0.0.0 --port 8080
 
 # Development mode with auto-reload
-uvicorn main:app --reload
+uvicorn src.web.main:app --reload
 ```
 
 ### API Endpoints
@@ -153,18 +182,33 @@ uvicorn main:app --reload
 - `GET /download/{filename}` - Download generated files
 - `WebSocket /ws/{connection_id}` - Real-time progress updates
 
+## 🧪 Testing
+
+Run the test suite:
+
+```bash
+# Basic tests
+python tests/test_app.py
+
+# Enhanced tests
+python tests/test_enhanced.py
+
+# Demo/example usage
+python tests/demo.py
+```
+
 ## 🐛 Troubleshooting
 
 ### Common Issues
 
+**Issue**: Import errors or module not found
+**Solution**: Ensure you're running from the project root and the virtual environment is activated
+
 **Issue**: "No module named 'reportlab'"
-**Solution**: Ensure virtual environment is activated and run `pip install -r requirements.txt`
+**Solution**: Run `pip install -r requirements.txt` in your activated virtual environment
 
 **Issue**: PDF generation fails
 **Solution**: The app will automatically fall back to HTML files that can be printed to PDF
-
-**Issue**: Downloads not appearing
-**Solution**: Check both the project's `downloads/` folder and your system's Downloads folder
 
 ### Logs
 The application provides detailed logging. Check the console output for:
@@ -172,13 +216,20 @@ The application provides detailed logging. Check the console output for:
 - Error messages
 - File generation status
 
+## 📚 Documentation
+
+- **[Quick Start Guide](docs/QUICK_START.md)** - Get up and running quickly
+- **[Contributing Guide](docs/CONTRIBUTING.md)** - How to contribute to the project
+- **[Changelog](docs/CHANGELOG.md)** - Version history and changes
+- **[Development Setup](scripts/setup_dev.sh)** - Automated development environment setup
+
 ## 🤝 Contributing
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+We welcome contributions! Please see our [Contributing Guide](docs/CONTRIBUTING.md) for details on:
+- Setting up the development environment
+- Code style and standards
+- Testing procedures
+- Submitting pull requests
 
 ## 📄 License
 
@@ -194,127 +245,15 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📈 Version History
 
 ### v1.0.0 (2025-10-05)
-- ✨ Initial release
+- ✨ Initial release with modular architecture
 - 📄 ReportLab PDF generation
 - 🔗 Intelligent documentation crawling
 - ⚡ Real-time WebSocket progress tracking
 - 🧹 Automatic temporary file cleanup
-- 🎯 Smart depth-based scraping (no arbitrary page limits)
-- 📁 Automatic file delivery to Downloads folder
+- 🎯 Smart depth-based scraping
+- 📁 Organized project structure
+- 📚 Comprehensive documentation
 
 ---
 
 **Made with ❤️ for the developer community**
-   ```bash
-   python main.py
-   ```
-   
-   Or using uvicorn directly:
-   ```bash
-   uvicorn main:app --reload
-   ```
-
-2. Open your browser and go to: `http://localhost:8000`
-
-3. Enter the documentation URL (e.g., `https://fastapi.tiangolo.com/`)
-
-4. Choose your output format (PDF or Markdown)
-
-5. Set the maximum number of pages to download (optional)
-
-6. Click "Download Documentation" and wait for processing
-
-7. The file will be automatically downloaded to your browser
-
-## Supported Documentation Sites
-
-The scraper works best with:
-- Python documentation (docs.python.org)
-- FastAPI documentation (fastapi.tiangolo.com)
-- React documentation (reactjs.org/docs)
-- Vue.js documentation (vuejs.org/guide)
-- And many other well-structured documentation sites
-
-## Configuration
-
-### Environment Variables
-
-You can customize the application behavior by setting these environment variables:
-
-- `MAX_PAGES_DEFAULT`: Default maximum pages to scrape (default: 50)
-- `OUTPUT_DIR`: Directory to save downloaded files (default: downloads)
-
-### Scraping Settings
-
-In `doc_scraper.py`, you can modify:
-- Request timeout
-- Delay between requests
-- Content selectors for different documentation formats
-- URL filtering rules
-
-## API Endpoints
-
-- `GET /`: Main web interface
-- `POST /download`: Process documentation and return file
-- `GET /status`: Health check endpoint
-
-## File Structure
-
-```
-doc-download/
-├── main.py              # FastAPI application
-├── doc_scraper.py       # Documentation scraping logic
-├── requirements.txt     # Python dependencies
-├── templates/
-│   └── index.html      # Web interface template
-├── static/             # Static files (CSS, JS, images)
-├── downloads/          # Generated files (auto-created)
-└── README.md          # This file
-```
-
-## Dependencies
-
-- **FastAPI**: Modern web framework for building APIs
-- **BeautifulSoup4**: HTML parsing and content extraction
-- **WeasyPrint**: PDF generation from HTML
-- **Markdownify**: HTML to Markdown conversion
-- **Requests**: HTTP library for web scraping
-- **Jinja2**: Template engine for HTML rendering
-
-## Troubleshooting
-
-### Common Issues
-
-1. **PDF Generation Errors**: WeasyPrint requires additional system dependencies:
-   - On macOS: `brew install pango`
-   - On Ubuntu: `sudo apt-get install libpango-1.0-0 libharfbuzz0b libpangoft2-1.0-0`
-
-2. **Permission Errors**: Ensure the application has write permissions for the downloads directory
-
-3. **Timeout Errors**: Some sites may be slow to respond. Increase the timeout in `doc_scraper.py`
-
-4. **No Content Found**: The scraper may not recognize the documentation structure. Check the content selectors in `_extract_main_content()`
-
-### Debugging
-
-Enable debug logging by modifying the logging level in `doc_scraper.py`:
-
-```python
-logging.basicConfig(level=logging.DEBUG)
-```
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test thoroughly
-5. Submit a pull request
-
-## License
-
-This project is open source and available under the MIT License.
-
-## Disclaimer
-
-This tool is for educational and personal use. Please respect robots.txt files and website terms of service when scraping documentation. Be mindful of server resources and implement appropriate delays between requests.

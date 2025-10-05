@@ -29,9 +29,12 @@ logger = logging.getLogger(__name__)
 
 # Import config settings
 try:
-    from config import TEMP_DIR
+    from .config import TEMP_DIR
 except ImportError:
-    TEMP_DIR = "temp"  # Fallback if config import fails
+    try:
+        from config import TEMP_DIR
+    except ImportError:
+        TEMP_DIR = "temp"  # Fallback if config import fails
 
 class DocumentationScraper:
     def __init__(self, base_url: str, progress_tracker=None):

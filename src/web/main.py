@@ -9,14 +9,21 @@ import shutil
 import json
 import uuid
 from datetime import datetime
-from doc_scraper import DocumentationScraper
-from config import OUTPUT_DIR, USER_DOWNLOADS_DIR, TEMP_DIR, TEMPLATE_DIR
+from pathlib import Path
+import sys
+import os
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+
+from core.doc_scraper import DocumentationScraper
+from core.config import OUTPUT_DIR, USER_DOWNLOADS_DIR, TEMP_DIR, TEMPLATE_DIR
 
 app = FastAPI(title="Documentation Downloader", description="Download and convert documentation to PDF or Markdown")
 
 # Setup templates and static files
-templates = Jinja2Templates(directory=TEMPLATE_DIR)
-app.mount("/static", StaticFiles(directory="static"), name="static")
+templates_dir = Path(__file__).parent / "templates"
+static_dir = Path(__file__).parent / "static"
+templates = Jinja2Templates(directory=str(templates_dir))
+app.mount("/static", StaticFiles(directory=str(static_dir)), name="static")
 
 # Create output directories if they don't exist
 os.makedirs(OUTPUT_DIR, exist_ok=True)

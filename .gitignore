@@ -14,6 +14,7 @@ lib/
 lib64/
 parts/
 sdist/
+tests/
 var/
 wheels/
 share/python-wheels/
@@ -74,3 +75,7 @@ coverage.xml
 # Documentation builds
 docs/_build/
 site/
+
+# Misc
+PRE_RELEASE_CHECKLIST.md
+prepare_git.sh
