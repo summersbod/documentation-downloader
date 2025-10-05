@@ -224,6 +224,10 @@ class DocumentationScraper:
         for link in soup.find_all('a', href=True):
             href = link['href']
             
+            # Ensure href is a string
+            if not isinstance(href, str):
+                continue
+                
             # Convert relative URLs to absolute
             full_url = urljoin(current_url, href)
             
