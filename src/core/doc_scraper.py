@@ -139,7 +139,7 @@ class DocumentationScraper:
             response = self.session.get(url, timeout=10)
             response.raise_for_status()
             
-            soup = BeautifulSoup(response.content, 'html.parser')
+            soup = BeautifulSoup(response.text, 'html.parser')
             
             # Extract title
             title = self._extract_title(soup, url)
@@ -555,34 +555,6 @@ class DocumentationScraper:
         html_paragraphs = [f'<p>{p.replace(chr(10), "<br>")}</p>' for p in paragraphs if p.strip()]
         
         return '\n'.join(html_paragraphs)
-
-    def _text_to_formatted_html(self, text: str) -> str:
-        """Convert plain text to well-formatted HTML"""
-        
-        # Escape HTML characters
-        text = text.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
-        
-        # Split into paragraphs
-        paragraphs = text.split('\n\n')
-        html_parts = []
-        
-        for paragraph in paragraphs:
-            paragraph = paragraph.strip()
-            if not paragraph:
-                continue
-                
-            # Check if it looks like a heading (short line, potentially all caps or title case)
-            if len(paragraph) < 100 and paragraph.isupper():
-                html_parts.append(f'<h3>{paragraph}</h3>')
-            elif len(paragraph) < 80 and not '.' in paragraph[-10:]:
-                # Might be a subheading
-                html_parts.append(f'<h4>{paragraph}</h4>')
-            else:
-                # Regular paragraph
-                formatted_paragraph = paragraph.replace('\n', '<br>')
-                html_parts.append(f'<p>{formatted_paragraph}</p>')
-        
-        return '\n'.join(html_parts)
 
     def _text_to_formatted_html(self, text: str) -> str:
         """Convert plain text to formatted HTML with better structure"""

@@ -24,24 +24,22 @@ Open your browser and go to: `http://localhost:8000`
 
 | Script | Purpose | Usage |
 |--------|---------|-------|
-| `start_app.py` | Simple startup with helpful messages | `python start_app.py` |
-| `run.py` | Production-ready with options | `python run.py --help` |
-| `test_app.py` | Test suite | `python test_app.py` |
-| `demo.py` | Interactive demo | `python demo.py` |
+| `app.py` | Main entry point with dependency checking | `python app.py` |
+| `start_app.py` | Alternative startup with helpful messages | `python start_app.py` |
+| `tests/test_app.py` | Basic functionality test suite | `python tests/test_app.py` |
+| `tests/demo.py` | Interactive demo | `python tests/demo.py` |
 
-## 🔧 Command Line Options (run.py)
+## 🔧 Command Line Options (app.py)
 
 ```bash
-python run.py --host 0.0.0.0 --port 8080 --reload
+python app.py
 ```
 
-Options:
-- `--host`: Host to bind to (default: 0.0.0.0)
-- `--port`: Port to bind to (default: 8000)
-- `--reload`: Enable auto-reload for development
-- `--workers`: Number of worker processes
-- `--log-level`: Set logging level (debug/info/warning/error)
-- `--check`: Check dependencies and exit
+The main entry point includes:
+- Automatic dependency checking
+- Clear error messages for missing dependencies
+- Guidance on using the virtual environment
+- Smart import handling
 
 ## 📄 PDF Generation
 
@@ -73,7 +71,7 @@ Edit `config.py` to customize:
 
 1. **No content found**: Check if the site structure is supported
 2. **Slow scraping**: Increase request delay in config
-3. **Import errors**: Run `python run.py --check`
+3. **Import errors**: Make sure you're using the virtual environment: `./venv/bin/python app.py`
 
 ## 📚 Examples
 
