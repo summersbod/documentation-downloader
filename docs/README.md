@@ -12,6 +12,7 @@ This directory contains comprehensive documentation for the Documentation Downlo
 
 ### Development
 - **[CONTRIBUTING.md](CONTRIBUTING.md)** - Guidelines for contributing to the project
+- **[IDE_CONFIGURATION.md](IDE_CONFIGURATION.md)** - VS Code and IDE setup guide
 
 ### Release Information
 - **[CHANGELOG.md](CHANGELOG.md)** - Version history and changes

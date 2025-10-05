@@ -1,0 +1,16 @@
+# Typing configuration for improved IDE support
+[tool.pyright]
+include = ["src", "tests", "scripts"]
+exclude = [
+    "**/__pycache__",
+    "**/.venv",
+    "**/node_modules",
+    "**/.git",
+    "**/temp"
+]
+extraPaths = ["src"]
+pythonVersion = "3.8"
+typeCheckingMode = "basic"
+
+[tool.pylance]
+extraPaths = ["src"]

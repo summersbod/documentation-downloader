@@ -219,6 +219,8 @@ The application provides detailed logging. Check the console output for:
 ## 📚 Documentation
 
 - **[Quick Start Guide](docs/QUICK_START.md)** - Get up and running quickly
+- **[IDE Configuration Guide](docs/IDE_CONFIGURATION.md)** - VS Code and other IDE setup
+- **[Project Structure](docs/PROJECT_STRUCTURE.md)** - Understanding the codebase organization
 - **[Contributing Guide](docs/CONTRIBUTING.md)** - How to contribute to the project
 - **[Changelog](docs/CHANGELOG.md)** - Version history and changes
 - **[Development Setup](scripts/setup_dev.sh)** - Automated development environment setup

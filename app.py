@@ -36,6 +36,26 @@ def check_dependencies():
     
     return missing_deps
 
+def get_version():
+    """Get version with proper error handling"""
+    try:
+        from core.version import __version__  # type: ignore
+        return __version__
+    except ImportError as e:
+        print(f"❌ Error importing version: {e}")
+        print("💡 Make sure you're in the correct directory and dependencies are installed")
+        sys.exit(1)
+
+def get_main_function():
+    """Get main function with proper error handling"""
+    try:
+        from start_app import main  # type: ignore
+        return main
+    except ImportError as e:
+        print(f"❌ Error importing main function: {e}")
+        print("💡 Make sure start_app.py exists and is accessible")
+        sys.exit(1)
+
 if __name__ == "__main__":
     # Check dependencies first
     missing_deps = check_dependencies()
@@ -52,8 +72,8 @@ if __name__ == "__main__":
         sys.exit(1)
     
     # Import version and main function only after dependency check
-    from core.version import __version__
-    from start_app import main
+    version = get_version()
+    main = get_main_function()
     
-    print(f"Documentation Downloader v{__version__}")
+    print(f"Documentation Downloader v{version}")
     main()
